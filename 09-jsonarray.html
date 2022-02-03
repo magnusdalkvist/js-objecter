@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section class="container">
+        <template>
+            <article>
+                <h2>Mærke:</h2>
+                <h3>Model:</h3>
+                <p>Motor:</p>
+                <p>KM:</p>
+                <p>Udstyr:</p>
+                <ul class="udstyr"></ul>
+            </article>
+        </template>
+    </section>
+    <script>
+        const fil = "biler.json";
+
+        async function hentdata(fil) {
+            const resultat = await fetch(fil);
+            const json = await resultat.json();
+            vis(json);
+        }
+
+        function vis(json) {
+            console.log(json);
+        }
+
+        hentdata(fil);
+
+        let container = document.querySelector(".container");
+        let temp = document.querySelector("template");
+
+        function vis(biler) {
+            biler.forEach(bil => {
+                let klon = temp.cloneNode(true).content;
+                klon.querySelector("h2").textContent = bil.mærke;
+                klon.querySelector("h3").textContent = bil.model;
+                klon.querySelector("p:first-of-type").textContent = `Motor: ${bil.motor}`;
+                klon.querySelector("p:nth-of-type(2)").textContent = `KM: ${bil.km}`;
+                bil.udstyr.forEach(udstyr => {
+                    klon.querySelector(".udstyr").innerHTML += `<li>${udstyr}</li>`;
+                })
+                container.appendChild(klon);
+            })
+        }
+    </script>
+</body>
+
+</html>
