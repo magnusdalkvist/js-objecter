@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 1rem;
+        }
+
+        article {
+            border: 1px solid black;
+        }
+
+        img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+    </style>
+    <section class="container">
+        <template>
+            <article>
+                <img src="" alt="">
+                <h3></h3>
+                <p></p>
+            </article>
+        </template>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", start)
+        function start() {
+            let events = [
+                { "navn": "A Calling", "instruktør": "Christian Bengtson", "land": "Danmark", "varighed": "20", "år": "2019", "billede": "	https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/W6dOqabNhHKBPXxxKKEZRA84-720.jpg" },
+                { "navn": "A Hole In My Heart", "instruktør": "Mees Peijnenburg", "land": "Holland", "varighed": "9", "år": "2015", "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Q8K1pZrOs03Q0IrDkBwGVu5r-720.jpg" },
+                { "navn": "A Tower of Two", "instruktør": "Jacob Krzysztof Glogowski", "land": "Danmark", "varighed": "21", "år": "2019", "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Zdt2ODEqSVOkNe8nUaSSu8kd.jpg" },
+                { "navn": "A Worthy Man", "instruktør": "Kristian Håskjold", "land": "Danmark", "varighed": "19", "år": "2018", "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/2iUOgQpixgIQCxyLtY6KiYuU-720.jpg" },
+                { "navn": "ANIME", "instruktør": "Arnaud Brisebois", "land": "Canada", "varighed": "12", "år": "2016", "billede": "	https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/FE3GG1abinQKHS0yh4xpyiY2-720.jpg" }
+            ]
+
+            const container = document.querySelector(".container");
+            const eventTemplate = document.querySelector("template");
+
+            events.forEach(event => {
+                let klon = eventTemplate.cloneNode(true).content;
+                klon.querySelector("img").src = event.billede;
+                klon.querySelector("h3").textContent = event.navn;
+                klon.querySelector("p").textContent = `${event.instruktør} | ${event.land} | ${event.varighed} min | ${event.år}`;
+                container.appendChild(klon);
+            })
+        }
+    </script>
+</body>
+
+</html>
